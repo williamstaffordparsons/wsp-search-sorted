@@ -42,19 +42,24 @@ unsigned char wsp_search_sorted_ascending(unsigned long low,
         }
       } else {
         while (
-          haystack[high] > needle &&
+          haystack[high] != needle &&
           gap > 1
         ) {
-          high -= gap >> 1;
-          gap = (gap + 1) >> 1;
-        }
+          while (
+            haystack[high] > needle &&
+            gap > 1
+          ) {
+            high -= gap >> 1;
+            gap = (gap + 1) >> 1;
+          }
 
-        while (
-          haystack[high] < needle &&
-          gap > 1
-        ) {
-          high += gap >> 1;
-          gap = (gap + 1) >> 1;
+          while (
+            haystack[high] < needle &&
+            gap > 1
+          ) {
+            high += gap >> 1;
+            gap = (gap + 1) >> 1;
+          }
         }
       }
     }
@@ -112,19 +117,24 @@ unsigned char wsp_search_sorted_descending(unsigned long low,
         }
       } else {
         while (
-          haystack[high] < needle &&
+          haystack[high] != needle &&
           gap > 1
         ) {
-          high -= gap >> 1;
-          gap = (gap + 1) >> 1;
-        }
+          while (
+            haystack[high] < needle &&
+            gap > 1
+          ) {
+            high -= gap >> 1;
+            gap = (gap + 1) >> 1;
+          }
 
-        while (
-          haystack[high] > needle &&
-          gap > 1
-        ) {
-          high += gap >> 1;
-          gap = (gap + 1) >> 1;
+          while (
+            haystack[high] > needle &&
+            gap > 1
+          ) {
+            high += gap >> 1;
+            gap = (gap + 1) >> 1;
+          }
         }
       }
     }
