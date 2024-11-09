@@ -22,7 +22,7 @@ unsigned char wsp_search_sorted_ascending(unsigned long low,
 
     while (
       haystack[high] != needle &&
-      gap > 0
+      gap > 1
     ) {
       if (gap > 32) {
         if (
@@ -32,26 +32,21 @@ unsigned char wsp_search_sorted_ascending(unsigned long low,
         ) {
           high = _gap;
           gap = high - low;
-          _gap = gap >> 1;
 
           while (
             haystack[high] < needle &&
-            _gap > 0
+            gap > 1
           ) {
+            high += gap >> 1;
             gap = (gap + 1) >> 1;
-            high += _gap;
-            _gap = gap >> 1;
           }
         } else {
-          _gap = gap >> 1;
-
           while (
             haystack[high] > needle &&
-            _gap > 0
+            gap > 1
           ) {
+            high -= gap >> 1;
             gap = (gap + 1) >> 1;
-            high -= _gap;
-            _gap = gap >> 1;
           }
 
           while (
@@ -65,17 +60,14 @@ unsigned char wsp_search_sorted_ascending(unsigned long low,
       } else {
         while (
           haystack[high] != needle &&
-          gap > 0
+          gap > 1
         ) {
-          _gap = gap >> 1;
-
           while (
             haystack[high] > needle &&
-            _gap > 0
+            gap > 1
           ) {
+            high -= gap >> 1;
             gap = (gap + 1) >> 1;
-            high -= _gap;
-            _gap = gap >> 1;
           }
 
           while (
@@ -122,7 +114,7 @@ unsigned char wsp_search_sorted_descending(unsigned long low,
 
     while (
       haystack[high] != needle &&
-      gap > 0
+      gap > 1
     ) {
       if (gap > 32) {
         if (
@@ -132,26 +124,21 @@ unsigned char wsp_search_sorted_descending(unsigned long low,
         ) {
           high = _gap;
           gap = high - low;
-          _gap = gap >> 1;
 
           while (
             haystack[high] > needle &&
-            _gap > 0
+            gap > 1
           ) {
+            high += gap >> 1;
             gap = (gap + 1) >> 1;
-            high += _gap;
-            _gap = gap >> 1;
           }
         } else {
-          _gap = gap >> 1;
-
           while (
             haystack[high] < needle &&
-            _gap > 0
+            gap > 1
           ) {
+            high -= gap >> 1;
             gap = (gap + 1) >> 1;
-            high -= _gap;
-            _gap = gap >> 1;
           }
 
           while (
@@ -165,17 +152,14 @@ unsigned char wsp_search_sorted_descending(unsigned long low,
       } else {
         while (
           haystack[high] != needle &&
-          gap > 0
+          gap > 1
         ) {
-          _gap = gap >> 1;
-
           while (
             haystack[high] < needle &&
-            _gap > 0
+            gap > 1
           ) {
+            high -= gap >> 1;
             gap = (gap + 1) >> 1;
-            high -= _gap;
-            _gap = gap >> 1;
           }
 
           while (
