@@ -12,8 +12,8 @@ Read more [here](https://williamstaffordparsons.github.io/wsp-search-sorted/).
 #include "wsp_search_sorted.h"
 
 int main(void) {
-  unsigned long input_ascending[6] = {1, 11, 111, 1111, 11111, 111111};
-  unsigned long input_descending[6] = {111111, 11111, 1111, 111, 11, 1};
+  const unsigned long input_ascending[6] = {1, 11, 111, 1111, 11111, 111111};
+  const unsigned long input_descending[6] = {111111, 11111, 1111, 111, 11, 1};
   unsigned long position;
 
   if (wsp_search_sorted_ascending(0, 5, input_ascending, 111, &position) == 1) {
