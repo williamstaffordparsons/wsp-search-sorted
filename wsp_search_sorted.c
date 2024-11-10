@@ -5,7 +5,6 @@ unsigned char wsp_search_sorted_ascending(unsigned long low,
                                           unsigned long *haystack,
                                           unsigned long needle,
                                           unsigned long *position) {
-  unsigned long _gap;
   unsigned long gap;
 
   if (haystack[high] == needle) {
@@ -25,13 +24,9 @@ unsigned char wsp_search_sorted_ascending(unsigned long low,
       gap > 1
     ) {
       if (gap > 32) {
-        if (
-          (_gap = high >> 3) &&
-          _gap > low &&
-          haystack[_gap] >= needle
-        ) {
-          high = _gap;
-          gap = high - low;
+        if (haystack[high - (gap >> 3)] < needle) {
+          gap >>= 3;
+          high -= gap;
 
           while (
             haystack[high] < needle &&
@@ -97,7 +92,6 @@ unsigned char wsp_search_sorted_descending(unsigned long low,
                                            unsigned long *haystack,
                                            unsigned long needle,
                                            unsigned long *position) {
-  unsigned long _gap;
   unsigned long gap;
 
   if (haystack[high] == needle) {
@@ -117,13 +111,9 @@ unsigned char wsp_search_sorted_descending(unsigned long low,
       gap > 1
     ) {
       if (gap > 32) {
-        if (
-          (_gap = high >> 3) &&
-          _gap > low &&
-          haystack[_gap] <= needle
-        ) {
-          high = _gap;
-          gap = high - low;
+        if (haystack[high - (gap >> 3)] > needle) {
+          gap >>= 3;
+          high -= gap;
 
           while (
             haystack[high] > needle &&
